@@ -44,10 +44,59 @@ app.use('/users', usersRoutes);
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.get('/', (req, res) => {
-  res.render('index');
+// listener
+app.listen(PORT, () => {
+  console.log(`food order app listening on port ${PORT}`);
 });
 
-app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+// routes
+
+// testing
+app.get('/ping', (req, res) => {
+  res.status(200).end('PONG!');
 });
+
+app.get('/', (req, res) => {
+  res.render('loginpage');
+  //login submit forumn
+});
+// app.get('/login/:id', (req, res) => {
+//   // using encrypted cookies
+//   req.session.user_id = req.params.id;
+
+//   // or using plain-text cookies
+//   res.cookie('user_id', req.params.id);
+
+//   // send the user somewhere
+//   res.redirect('/mainpage');
+// //
+// });
+// app.get('/users', (req, res) => {
+//   res.render('/mainpage');
+//   // items
+// });
+// app.post('/users', (req, res) => {
+//   // update user page
+//   res.render('/mainpage');
+
+// });
+// psuedo code
+//users page
+//logging in - get
+// -main page - get
+// creating order -
+
+// action between the user and employee
+
+//employees
+// login / shows order - get -- hard coded isEmployee
+
+
+
+// (Browse, Read, Edit, Add, Delete)
+// /                                              - login
+// B - Get /Users 	            – render page
+// R - Get /Users/:id 	        – load food information for selected food type
+// E - Post /Users/:id                  – edit food information(stretch)
+// A - Post/Users  	            – create order
+
