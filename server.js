@@ -49,37 +49,36 @@ app.listen(PORT, () => {
   console.log(`food order app listening on port ${PORT}`);
 });
 
-// routes
-
 // testing
 app.get('/ping', (req, res) => {
   res.status(200).end('PONG!');
 });
 
-app.get('/', (req, res) => {
-  res.render('loginpage');
+// routes
+app.get('/login', (req, res) => {
+  res.render('index.ejs');
   //login submit forumn
 });
-// app.get('/login/:id', (req, res) => {
-//   // using encrypted cookies
-//   req.session.user_id = req.params.id;
+app.get('/login/:id', (req, res) => {
+  // using encrypted cookies
+  req.session.user_id = req.params.id;
 
-//   // or using plain-text cookies
-//   res.cookie('user_id', req.params.id);
+  // or using plain-text cookies
+  res.cookie('user_id', req.params.id);
 
-//   // send the user somewhere
-//   res.redirect('/mainpage');
-// //
-// });
-// app.get('/users', (req, res) => {
-//   res.render('/mainpage');
-//   // items
-// });
-// app.post('/users', (req, res) => {
-//   // update user page
-//   res.render('/mainpage');
+  // send the user to main page
+  res.redirect('/users.ejs');
+//
+});
+app.get('/users', (req, res) => {
+  res.render('/users.ejs');
+  // items
+});
+app.post('/users', (req, res) => {
+  // update user page
+  res.render('/users.ejs');
 
-// });
+});
 // psuedo code
 //users page
 //logging in - get
