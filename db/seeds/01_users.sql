@@ -18,6 +18,11 @@ VALUES
   (4, 'Pasta', 11.99, 'https://example.com/pasta.jpg', 'Homemade pasta with your choice of sauce.'),
   (5, 'Sushi', 14.99, 'https://example.com/sushi.jpg', 'Assorted sushi rolls with fresh fish and rice.');
 
+INSERT INTO Orders(user_id, active, estimated_time_minutes)
+VALUES(1, true, 15),
+(2, false, 20),
+(3, true, 25),
+(4, false, 13);
 
 INSERT INTO Order_Items(food_id, order_id, quantity)
 VALUES(1, 1, 3),

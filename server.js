@@ -49,11 +49,6 @@ app.listen(PORT, () => {
   console.log(`food order app listening on port ${PORT}`);
 });
 
-// testing
-app.get('/ping', (req, res) => {
-  res.status(200).end('PONG!');
-});
-
 // routes
 app.get('/login', (req, res) => {
   res.render('index.ejs');
