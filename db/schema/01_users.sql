@@ -1,7 +1,7 @@
-DROP TABLE order_items;
-DROP TABLE orders;
-DROP TABLE food_items;
-DROP TABLE users;
+DROP TABLE if exists order_items CASCADE;
+DROP TABLE if exists orders CASCADE;
+DROP TABLE if exists food_items CASCADE;
+DROP TABLE if exists users CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
