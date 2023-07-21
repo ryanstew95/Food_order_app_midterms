@@ -74,11 +74,11 @@ app.get('/login', (req, res) => {
 
 app.post('/login', async (req, res) => {
   const { user_id } = req.body;
-
+  console.log('User ID:', user_id);
   try {
     const query = 'SELECT * FROM users WHERE name = $1';
     const result = await pool.query(query, [user_id]);
-
+    console.log('Query Result:', result.rows);
     if (result.rows.length === 1) {
       // Successful login, redirect to the main page
       res.redirect('/main');
