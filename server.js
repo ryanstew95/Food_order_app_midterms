@@ -1,3 +1,4 @@
+const { Pool } = require('pg');
 // load .env data into process.env
 require('dotenv').config();
 
@@ -59,54 +60,37 @@ app.listen(PORT, () => {
   console.log(`food order app listening on port ${PORT}`);
 });
 
-const mockUsers = [
-  { username: 'user1', password: 'password1' },
-  { username: 'user2', password: 'password2' },
-  // Add more users as needed
-];
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-// LOGIN SETUP
-/////////////////////////////////////////////////////////////////////////////////////////////////////
+const pool = new Pool({
+  user: 'labber',
+  host: 'localhost',
+  database: 'midterm',
+  password: 'labber',
+  port: 5432,
+});
 
 app.get('/login', (req, res) => {
   res.render('login');
 });
 
-app.post('/login', (req, res) => {
-  const { username } = req.body;
+app.post('/login', async (req, res) => {
+  const { user_id } = req.body;
 
-  // Check the user credentials (this is just a mock example)
-  const mockUsers = [
-    { username: 'user1' },
-    { username: 'user2' },
-  ];
+  try {
+    const query = 'SELECT * FROM users WHERE name = $1';
+    const result = await pool.query(query, [user_id]);
 
-  const user = mockUsers.find((user) => user.username === username);
-
-  if (user) {
-    // Successful login, redirect to the main page
-    res.redirect('/main');
-  } else {
-    // Failed login, redirect back to the login page with an error message
-    res.render('login', { error: 'Invalid username' });
+    if (result.rows.length === 1) {
+      // Successful login, redirect to the main page
+      res.redirect('/main');
+    } else {
+      // Failed login, redirect back to the login page with an error message
+      res.render('login', { error: 'Invalid username' });
+    }
+  } catch (error) {
+    console.error('Error executing the query:', error);
+    res.render('login', { error: 'An error occurred. Please try again later.' });
   }
 });
-
-app.get('/login/:id', (req, res) => {
-  // using encrypted cookies (you need to set up session/cookie middleware)
-  req.session.user_id = req.params.id;
-
-  // or using plain-text cookies (you need to set up session/cookie middleware)
-  res.cookie('user_id', req.params.id);
-
-  // send the user to the main page (index.ejs)
-  res.redirect('index.ejs');
-});
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-// LOGIN SETUP
-/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 app.get('/main', (req,res) => {
   // display food items
