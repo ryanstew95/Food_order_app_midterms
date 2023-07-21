@@ -1,4 +1,6 @@
 const { Pool } = require('pg');
+const { db } = require('/.db')
+db.connect();
 // load .env data into process.env
 require('dotenv').config();
 
@@ -62,13 +64,13 @@ app.listen(PORT, () => {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // LOGIN //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-const pool = new Pool({
-  user: 'labber',
-  host: 'localhost',
-  database: 'midterm',
-  password: 'labber',
-  port: 5432,
-});
+// const pool = new Pool({
+//   user: 'labber',
+//   host: 'localhost',
+//   database: 'midterm',
+//   password: 'labber',
+//   port: 5432,
+// });
 
 app.get('/login', (req, res) => {
   res.render('login');
