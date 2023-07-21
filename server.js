@@ -65,29 +65,31 @@ const mockUsers = [
   // Add more users as needed
 ];
 
-// Routes
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// LOGIN SETUP
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
 app.get('/login', (req, res) => {
   res.render('login');
 });
 
 app.post('/login', (req, res) => {
-  const { username, password } = req.body;
+  const { username } = req.body;
 
   // Check the user credentials (this is just a mock example)
   const mockUsers = [
-    { username: 'user1', password: 'password1' },
-    { username: 'user2', password: 'password2' },
-    // Add more users as needed
+    { username: 'user1' },
+    { username: 'user2' },
   ];
 
-  const user = mockUsers.find((user) => user.username === username && user.password === password);
+  const user = mockUsers.find((user) => user.username === username);
 
   if (user) {
     // Successful login, redirect to the main page
     res.redirect('/main');
   } else {
     // Failed login, redirect back to the login page with an error message
-    res.render('login', { error: 'Invalid username or password' });
+    res.render('login', { error: 'Invalid username' });
   }
 });
 
@@ -102,35 +104,30 @@ app.get('/login/:id', (req, res) => {
   res.redirect('index.ejs');
 });
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// LOGIN SETUP
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
 app.get('/main', (req,res) => {
   // display food items
   res.render('index');
 });
 
-app.get('/users', (req, res) => {
-  res.render('/users.ejs');
-  // items
-});
-app.post('/users', (req, res) => {
-  // update user page
-  res.render('/users.ejs');
-
-});
-
 /**
  Login Page:
-GET /login: Display the login page to the user.
+[x] GET /login: Display the login page to the user.
+[x] POST /login: Handle the form submission when the user tries to log in.
 Main Page:
-GET /main: Display the main page of your food app, showing various food items or categories.
+[x] GET /main: Display the main page of your food app, showing various food items or categories.
 Employees Page (for viewing incoming orders):
-GET /employees: Display incoming orders for workers to see.
-GET /employees/order/:id: Display details of a specific order with ID :id.
+[] GET /employees: Display incoming orders for workers to see.
+[] GET /employees/order/:id: Display details of a specific order with ID :id.
 About Page:
-GET /about: Display information about your food app or your restaurant.
+[] GET /about: Display information about your food app or your restaurant.
 Cart Page (assuming this is the page where users can view their cart and place orders):
-GET /cart: Display the contents of the user's shopping cart.
-POST /cart/add: Handle the addition of items to the cart.
-POST /cart/remove/:id: Handle the removal of a specific item with ID :id from the cart.
-POST /cart/checkout: Handle the checkout process and payment.
+[] GET /cart: Display the contents of the user's shopping cart.
+[] POST /cart/add: Handle the addition of items to the cart.
+[] POST /cart/remove/:id: Handle the removal of a specific item with ID :id from the cart.
+[] POST /cart/checkout: Handle the checkout process and payment.
  */
 
