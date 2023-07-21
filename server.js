@@ -59,7 +59,9 @@ app.use('/users', usersRoutes);
 app.listen(PORT, () => {
   console.log(`food order app listening on port ${PORT}`);
 });
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// LOGIN //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 const pool = new Pool({
   user: 'labber',
   host: 'localhost',
@@ -75,23 +77,34 @@ app.get('/login', (req, res) => {
 app.post('/login', async (req, res) => {
   const { user_id } = req.body;
   console.log('User ID:', user_id);
+
   try {
-    const query = 'SELECT * FROM users WHERE name = $1';
+    const query = 'SELECT * FROM users WHERE id = $1';
     const result = await pool.query(query, [user_id]);
-    console.log('Query Result:', result.rows);
+
     if (result.rows.length === 1) {
-      // Successful login, redirect to the main page
-      res.redirect('/main');
+      // Get the user object from the query result
+      const user = result.rows[0];
+
+      if (user.isemployee) {
+        // User is an employee, render the order page
+        res.render('users', { user });
+      } else {
+        // User is not an employee, render the main page
+        res.render('index', { user });
+      }
     } else {
       // Failed login, redirect back to the login page with an error message
-      res.render('login', { error: 'Invalid username' });
+      res.redirect('/login?error=invalid');
     }
   } catch (error) {
     console.error('Error executing the query:', error);
     res.render('login', { error: 'An error occurred. Please try again later.' });
   }
 });
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// LOGIN //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 app.get('/main', (req,res) => {
   // display food items
   res.render('index');

@@ -6,9 +6,16 @@
 <body>
     <h1>Login Page</h1>
     <form method="POST" action="/login">
-      <input type="text" name="user_id" placeholder="Enter Username" />
+      <input type="number" name="user_id" placeholder="Enter User ID" />
       <input type="submit" value="Login" />
     </form>
-    </form>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const error = urlParams.get('error');
+
+      if (error === 'invalid') {
+        alert('Invalid user ID. Please try again.');
+      }
+    </script>
 </body>
 </html>
