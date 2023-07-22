@@ -120,6 +120,23 @@ app.get('/orders', async (req, res) => {
     res.render('orders', { orders: [], error: 'An error occurred while fetching orders.' }); // Change 'users' to 'orders'
   }
 });
+// Route to display a specific order by its id
+app.get('/orders/:id', async (req, res) => {
+  const orderId = req.params.id;
+
+  try {
+    // Fetch the order from the orders table by its id
+    const query = 'SELECT * FROM orders WHERE id = $1';
+    const result = await pool.query(query, [orderId]);
+    const orders = result.rows[0];
+
+    // Render the 'order.ejs' template and pass the order data
+    res.render('orders', { orders });
+  } catch (error) {
+    console.error('Error executing the query:', error);
+    res.render('orders', { orders: null, error: 'An error occurred while fetching the order.' });
+  }
+});
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // ORDERS //
