@@ -88,7 +88,7 @@ app.post('/login', async (req, res) => {
 
       if (user.isemployee) {
         // User is an employee, render the order page
-        res.render('users', { user });
+        res.redirect('/orders');
       } else {
         // User is not an employee, render the main page
         res.render('index', { user });
@@ -117,13 +117,14 @@ app.get('/orders', async (req, res) => {
 
     console.log('orders:', orders);
 
-    // Render the 'users.ejs' template and pass the orders data
-    res.render('users', { orders });
+    // Render the 'orders.ejs' template and pass the orders data
+    res.render('orders', { orders }); // Change 'users' to 'orders'
   } catch (error) {
     console.error('Error executing the query:', error);
-    res.render('users', { orders: [], error: 'An error occurred while fetching orders.' });
+    res.render('orders', { orders: [], error: 'An error occurred while fetching orders.' }); // Change 'users' to 'orders'
   }
 });
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // ORDERS //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -143,9 +144,9 @@ app.get('/main', async (req, res) => {
 [x] POST /login: Handle the form submission when the user tries to log in.
 Main Page:
 [x] GET /main: Display the main page of your food app, showing various food items or categories.
-Employees Page (for viewing incoming orders):
-[] GET /employees: Display incoming orders for workers to see.
-[] GET /employees/order/:id: Display details of a specific order with ID :id.
+Orders Page (for viewing incoming orders):
+[x] GET /orders: Display incoming orders for workers to see.
+[] GET /orders/:id: Display details of a specific order with ID :id.
 About Page:
 [] GET /about: Display information about your food app or your restaurant.
 Cart Page (assuming this is the page where users can view their cart and place orders):
