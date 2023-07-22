@@ -128,12 +128,23 @@ app.get('/orders', async (req, res) => {
 // MAIN //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 app.get('/main', async (req, res) => {
-  res.render('index');
+  const { user } = req.session;
+  res.render('index', { user });
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // MAIN //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
+// Add the sign-out route
+app.post('/logout', (req, res) => {
+  // Destroy the session to sign the user out
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying session:', err);
+    }
+    // Redirect the user back to the main page after signing out
+    res.redirect('/main');
+  });
+});
 /**
  Login Page:
 [x] GET /login: Display the login page to the user.

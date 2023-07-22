@@ -17,7 +17,9 @@
       <p>Welcome, <%= user.name %>!</p>
   </div>
   <% } %>
-
+  <form method="POST" action="/logout">
+    <button type="submit">Sign Out</button>
+  </form>
 
     <div id="error-message" style="display: none;"></div>
 
