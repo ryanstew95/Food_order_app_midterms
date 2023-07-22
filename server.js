@@ -70,10 +70,6 @@ const pool = new Pool({
   port: 5432,
 });
 
-app.get('/login', (req, res) => {
-  res.render('login');
-});
-
 app.post('/login', async (req, res) => {
   const { user_id } = req.body;
   console.log('User ID:', user_id);
@@ -91,7 +87,7 @@ app.post('/login', async (req, res) => {
         res.redirect('/orders');
       } else {
         // User is not an employee, render the main page
-        res.sendFile(__dirname + '/public/index.html');
+        res.render('index', { user });
       }
     } else {
       // Failed login, redirect back to the login page with an error message
@@ -99,7 +95,7 @@ app.post('/login', async (req, res) => {
     }
   } catch (error) {
     console.error('Error executing the query:', error);
-    res.render({ error: 'An error occurred. Please try again later.' });
+    res.render('login', { error: 'An error occurred. Please try again later.' });
   }
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -132,7 +128,7 @@ app.get('/orders', async (req, res) => {
 // MAIN //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 app.get('/main', async (req, res) => {
-  res.sendFile(__dirname + '/public/orders.html');
+  res.render('index');
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // MAIN //
