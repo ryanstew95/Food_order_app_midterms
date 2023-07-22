@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-cartItemQueries.addCartItem(2,5)
+cartItemQueries.addCartItem(3,7)
 .then(cartItems => {
   const templateVars = {
       cartItems
@@ -32,10 +32,11 @@ cartItemQueries.addCartItem(2,5)
     .status(500)
     .json({ error: err.message });
 });
+});
 
-router.get('/test', (req, res) => {
- res.json("this is working my new route")
-});
-});
+// router.get('/test', (req, res) => {
+//  res.json("this is working my new route")
+// });
+// });
 
 module.exports = router;

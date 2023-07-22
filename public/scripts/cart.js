@@ -1,7 +1,7 @@
 $(() => {
     $('#fetch-cart').on('click', () => {
-        $.ajax("/cart/test", {
-            method: "GET"
+        $.ajax("/cart", {
+            method: "POST"
         }).then((response) => {
             console.log("response", response)
         })
