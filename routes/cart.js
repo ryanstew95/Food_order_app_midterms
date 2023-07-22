@@ -18,8 +18,24 @@ router.get('/', (req, res) => {
   });
 
 });
+
+router.post('/', (req, res) => {
+cartItemQueries.addCartItem(2,5)
+.then(cartItems => {
+  const templateVars = {
+      cartItems
+  }
+  res.render("cart", templateVars)
+})
+.catch(err => {
+  res
+    .status(500)
+    .json({ error: err.message });
+});
+
 router.get('/test', (req, res) => {
  res.json("this is working my new route")
+});
 });
 
 module.exports = router;
