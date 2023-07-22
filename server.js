@@ -91,15 +91,15 @@ app.post('/login', async (req, res) => {
         res.redirect('/orders');
       } else {
         // User is not an employee, render the main page
-        res.render('index', { user });
+        res.sendFile(__dirname + '/public/index.html');
       }
     } else {
       // Failed login, redirect back to the login page with an error message
-      res.redirect('/login?error=invalid');
+      res.status(400).send('Invalid user ID. Please try again.');
     }
   } catch (error) {
     console.error('Error executing the query:', error);
-    res.render('login', { error: 'An error occurred. Please try again later.' });
+    res.render({ error: 'An error occurred. Please try again later.' });
   }
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -132,7 +132,7 @@ app.get('/orders', async (req, res) => {
 // MAIN //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 app.get('/main', async (req, res) => {
-  res.render('index');
+  res.sendFile(__dirname + '/public/orders.html');
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // MAIN //
