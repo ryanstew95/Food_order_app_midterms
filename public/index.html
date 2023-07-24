@@ -1,25 +1,14 @@
+<!-- not using this page any more changed it to
+ejs so we can add js and routes -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Food App</title>
-    <link rel="stylesheet" type="text/css" href="styles/mainn.css">
-    <link rel="stylesheet" type="text/css" href="styles/custom.css">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="nav-bar" id="top">
-    <form method="POST" action="/login">
-      <input type="number" name="user_id" placeholder="Enter User ID" />
-      <input type="submit" value="Login" />
-    </form>
-    <% if (user) { %>
-      <div class="user-section">
-          <p>Welcome, <%= user.name %>!</p>
-      </div>
-      <% } %>
-      <form method="POST" action="/logout">
-        <button type="submit">Sign Out</button>
-      </form>
     <div class="menu-section">
         <span id="menu-btn" class="menu-btn">&#9776;</span>
         <div id="dropdown-content" class="dropdown-content">
@@ -30,9 +19,7 @@
     </div>
         <h2>Snack-Bar</h2>
         <div class="cart-section">
-          <form method="GET" action="/cart">
           <button id="cart-btn" class="cart-btn">🛒<span id="cart-count"></span></button>
-        </form>
         </div>
     </div>
 
@@ -174,5 +161,3 @@
     <script src="scripts/cart.js"></script>
 </body>
 </html>
-
-

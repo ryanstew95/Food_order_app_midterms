@@ -11,11 +11,15 @@ INSERT INTO users
 
 INSERT INTO food_items
 (name, price, photo_url, description) VALUES
-('Burger', 9.99, 'https://example.com/burger.jpg', 'Delicious beef burger with lettuce, tomato, and cheese.'),
-('Pizza', 12.99, 'https://example.com/pizza.jpg', 'Freshly baked pizza with a variety of toppings.'),
-('Salad', 7.99, 'https://example.com/salad.jpg', 'Healthy salad with mixed greens, vegetables, and vinaigrette dressing.'),
-('Pasta', 11.99, 'https://example.com/pasta.jpg', 'Homemade pasta with your choice of sauce.'),
-('Sushi', 14.99, 'https://example.com/sushi.jpg', 'Assorted sushi rolls with fresh fish and rice.');
+('Italian Burger', 10.00, '/images/italianburger.jpg', 'A scrumptious Italian burger with freshly sourced tomatoes, lettuce, and our special house sauce. Served with aside of crispy fries'),
+(‘Burrito Bowl’, 15.00, ‘/images/burito.jpeg’, ‘Our Burrito Bowl features succulent grilled chicken, seasoned black beans, fresh avocado, and zesty salsa on a bed of fluffy rice. A hearty meal that will leave you satisfied!’),
+(‘Lasagna’, 20.00, ‘/images/lsangna.jpeg’, ‘Our Lasagna is a heavenly blend of pasta layers filled with rich meat sauce, creamy bechamel, and topped off with a generous sprinkle of mozzarella. Truly a comforting classic!’),
+('Pizza', 15.00, '/images/pizza.jpeg’, 'Experience the magic of Italy with our Pizza! Crafted with hand-tossed dough, slathered with tangy marinara, and topped with a delightful mix of cheese and toppings. Bellissimo!'),
+(‘Chicken Wings’, 18.00, ‘/images/chick.jpeg’, ‘Spice up your meal with our Chicken Wings! Crispy on the outside, juicy on the inside, and coated in our secret sauce. They're finger-licking good!’),
+(‘Fries’, 22.00, ‘Who can resist our golden Fries? Fried to perfection and lightly salted, they're the perfect side dish or a delicious snack on their own. Don't forget the ketchup!’),
+(‘Combo 1’, 30.00, ‘/images/combo1.png’, ‘Indulge in our Combo 1 for the perfect meal! You get our signature Italian Burger, a serving of crispy golden Fries, and your choice of a refreshing drink. It's the ultimate meal deal!’),
+(‘Combo 2’, 18.99, ‘images/combo2.jpeg’, ‘Dive into our Combo 2 for an unforgettable meal experience! Enjoy a slice of our delightful Pizza, accompanied by a fresh green salad, and wash it all down with a refreshing Mojito. The perfect combo to satisfy your hunger!’),
+(‘combo 3’, 20.99, ‘/images/combo3.jpeg’, ‘Savor the flavors of the North with our Combo 3! This meal includes our North Indian Thali, featuring a variety of delectable dishes such as dal makhani, paneer butter masala, mix veg, jeera rice, raita, naan, and a sweet dessert. It's a feast that's sure to please!’);
 
 INSERT INTO orders
 (user_id, active, estimated_time_minutes) VALUES
