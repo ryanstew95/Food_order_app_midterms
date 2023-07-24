@@ -148,6 +148,10 @@ app.get('/main', async (req, res) => {
   const { user } = req.session;
   res.render('index', { user });
 });
+app.get('/continue-shopping', (req, res) => {
+  // Redirect the user back to the main page
+  res.redirect('/main');
+});
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // MAIN //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -162,6 +166,23 @@ app.post('/logout', (req, res) => {
     res.redirect('/main');
   });
 });
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// CART //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+app.get('/cart', (req, res) => {
+  res.render('cart');
+});
+
+// Define the route to handle cart item addition
+app.post('/cart/add', (req, res) => {
+
+});
+
+// checkout
+app.post('/cart/checkout', (req, res) => {
+  res.render('check-out');
+});
+
 /**
  Login Page:
 [x] GET /login: Display the login page to the user.
@@ -170,11 +191,11 @@ Main Page:
 [x] GET /main: Display the main page of your food app, showing various food items or categories.
 Orders Page (for viewing incoming orders):
 [x] GET /orders: Display incoming orders for workers to see.
-[] GET /orders/:id: Display details of a specific order with ID :id.
+[x] GET /orders/:id: Display details of a specific order with ID :id.
 About Page:
 [] GET /about: Display information about your food app or your restaurant.
-Cart Page (assuming this is the page where users can view their cart and place orders):
-[] GET /cart: Display the contents of the user's shopping cart.
+Cart Page:
+[x] GET /cart: Display the contents of the user's shopping cart.
 [] POST /cart/add: Handle the addition of items to the cart.
 [] POST /cart/remove/:id: Handle the removal of a specific item with ID :id from the cart.
 [] POST /cart/checkout: Handle the checkout process and payment.
