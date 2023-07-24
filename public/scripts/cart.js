@@ -1,5 +1,5 @@
-var cart = [];
-
+let cart = [];
+// there's two addToCart functions
 function addToCart(itemId) {
   let item = document.getElementById(itemId);
   var title = item.getElementsByTagName("h3")[0].innerText;
@@ -124,11 +124,3 @@ document.addEventListener("DOMContentLoaded", function () {
   loadCart();
 });
 
-// commented this out because I set up the button in the server.js
-// // This is outside the DOMContentLoaded event listener
-// let cartBtn = document.getElementById("cart-btn");
-// if (cartBtn) {
-//   cartBtn.onclick = function () {
-//     window.location.href = "cart.html";
-//   };
-// }

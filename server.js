@@ -43,12 +43,16 @@ app.use(
 const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
+const cartRoutes = require('./routes/cart');
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', userApiRoutes);
-app.use('/api/widgets', widgetApiRoutes);
+app.use('/api/widgets', widgetApiRoutes); // instead of app.get but route.get - represents widget data eg cart info
 app.use('/users', usersRoutes);
+// eslint-disable-next-line no-undef
+app.use('/cart', cartRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -59,9 +63,10 @@ app.use('/users', usersRoutes);
 app.listen(PORT, () => {
   console.log(`food order app listening on port ${PORT}`);
 });
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-// LOGIN //
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// pretty sure this is in another file location
+// and I can export it in... need mentor help
+//db/queries/conection.js
 const pool = new Pool({
   user: 'labber',
   host: 'localhost',
@@ -70,12 +75,20 @@ const pool = new Pool({
   port: 5432,
 });
 
-app.post('/login', async (req, res) => {
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// LOGIN //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+app.post('/login', async(req, res) => {
+
+  // eslint-disable-next-line camelcase
   const { user_id } = req.body;
   console.log('User ID:', user_id);
 
   try {
     const query = 'SELECT * FROM users WHERE id = $1';
+
+    // eslint-disable-next-line camelcase
     const result = await pool.query(query, [user_id]);
 
     if (result.rows.length === 1) {
@@ -99,12 +112,9 @@ app.post('/login', async (req, res) => {
   }
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-// LOGIN //
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
 // ORDERS //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-app.get('/orders', async (req, res) => {
+app.get('/orders', async(req, res) => {
   try {
     // Fetch all rows from the orders table
     const query = 'SELECT * FROM orders';
@@ -121,7 +131,7 @@ app.get('/orders', async (req, res) => {
   }
 });
 // Route to display a specific order by its id
-app.get('/orders/:id', async (req, res) => {
+app.get('/orders/:id', async(req, res) => {
   const orderId = req.params.id;
 
   try {
@@ -139,12 +149,9 @@ app.get('/orders/:id', async (req, res) => {
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-// ORDERS //
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////
 // MAIN //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-app.get('/main', async (req, res) => {
+app.get('/main', async(req, res) => {
   const { user } = req.session;
   res.render('index', { user });
 });
@@ -153,9 +160,8 @@ app.get('/continue-shopping', (req, res) => {
   res.redirect('/main');
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-// MAIN //
+// Add the sign-out route //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-// Add the sign-out route
 app.post('/logout', (req, res) => {
   // Destroy the session to sign the user out
   req.session.destroy((err) => {
@@ -175,14 +181,16 @@ app.get('/cart', (req, res) => {
 
 // Define the route to handle cart item addition
 app.post('/cart/add', (req, res) => {
-
+// handle adding items to cart
 });
 
 // checkout
 app.post('/cart/checkout', (req, res) => {
   res.render('check-out');
 });
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// CART //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  Login Page:
 [x] GET /login: Display the login page to the user.
