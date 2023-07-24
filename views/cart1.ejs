@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart Summary</title>
+    <link rel="stylesheet" type="text/css" href="styles/cart.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Your Shopping Cart</h1>
+            <span id="cart-count"></span>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <ul id="cart-items">
+            </ul>
+            <div class="total-section">
+                <h2 id="total"></h2>
+            </div>
+            <div class="actions">
+              <form method="POST" action="/index1">
+              <button type="submit">Continue SHopping</button>
+              </form>
+
+                <button onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>© 2023 Snack-Bar. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="scripts/cart.js"></script>
+</body>
+</html>

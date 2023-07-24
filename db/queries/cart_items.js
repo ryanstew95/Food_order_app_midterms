@@ -36,7 +36,7 @@ const deleteCartItem = (itemId) => {
 };
 
 //deleteCartItem(15);
-addCartItem()
+//addCartItem()
 // any advantage of value const updateCart = (itemId) => {
 //   return db
 //   .query('SELECT order_items.id, food_items.name, food_items.price FROM order_items JOIN food_items ON order_items.food_id = food_items.id WHERE order_items.id = $1;', [itemId]) //DELETE FROM table_name WHERE condition;?

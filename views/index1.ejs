@@ -17,7 +17,11 @@
     </div>
         <h2>Snack-Bar</h2>
         <div class="cart-section">
-          <button id="cart-btn" class="cart-btn">🛒<span id="cart-count"></span></button>
+          <button method="POST" action="/cart1" id="cart-btn" class="cart-btn">🛒<span id="cart-count"></span></button>
+          <div class="actions">
+            <form name="cartSubmit" method="POST" action="/cart1">
+            <button type="submit">CART1 SUBMIT</button>
+            </form>
         </div>
     </div>
 
@@ -147,7 +151,6 @@
           <input type="submit" value="Submit">
         </form>
         <div class="our-contact">
-          <!-- will this need to be get/request/ajax? -->
           <h3>Our Contact Information</h3>
           <p>Email: info@example.com</p>
           <p>Phone: +1 2342564219</p>
@@ -160,3 +163,5 @@
     <script src="scripts/cart.js"></script>
 </body>
 </html>
+
+

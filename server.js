@@ -65,6 +65,14 @@ app.listen(PORT, () => {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // LOGIN //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// login page no longer exists as well as the ejs
+// instead index is the main page
+// app.get('/main', async (req, res) => {
+//   const { user } = req.session;
+//   res.render('index', { user });
+// });
+
 const pool = new Pool({
   user: 'labber',
   host: 'localhost',
@@ -73,11 +81,16 @@ const pool = new Pool({
   port: 5432,
 });
 
-app.get('/login', (req, res) => {
-  res.render('login');
+app.get('/index1', (req, res) => {
+  res.render('index1');
 });
 
-app.post('/login', async (req, res) => {
+app.post('/index1', (req, res) => {
+  res.render('index1');
+
+});
+
+app.post('/index', async (req, res) => {
   const { user_id } = req.body;
   console.log('User ID:', user_id);
 
@@ -94,7 +107,7 @@ app.post('/login', async (req, res) => {
         res.render('users', { user });
       } else {
         // User is not an employee, render the main page
-        res.render('index', { user });
+        res.render('index1', { user });
       }
     } else {
       // Failed login, redirect back to the login page with an error message
@@ -102,7 +115,7 @@ app.post('/login', async (req, res) => {
     }
   } catch (error) {
     console.error('Error executing the query:', error);
-    res.render('login', { error: 'An error occurred. Please try again later.' });
+    res.render('login1', { error: 'An error occurred. Please try again later.' });
   }
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -127,15 +140,26 @@ app.get('/orders', async (req, res) => {
     res.render('users', { orders: [], error: 'An error occurred while fetching orders.' });
   }
 });
+
+
+
+
+app.get('/cart1', (req, res) => {
+  res.render('cart1');
+});
+
+app.post('/cart1', (req, res) => {
+  res.render('cart1');
+});
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // ORDERS //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // MAIN //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-app.get('/main', async (req, res) => {
-  res.render('index');
-});
+// app.get('/main', async (req, res) => {
+//   res.render('index');
+// });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // MAIN //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
