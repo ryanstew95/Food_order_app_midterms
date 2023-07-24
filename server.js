@@ -208,5 +208,7 @@ Cart Page:
 [] POST /cart/add: Handle the addition of items to the cart.
 [] POST /cart/remove/:id: Handle the removal of a specific item with ID :id from the cart.
 [] POST /cart/checkout: Handle the checkout process and payment.
+contact us:
+[] POST /submit_form
  */
 
