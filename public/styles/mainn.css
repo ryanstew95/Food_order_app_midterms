@@ -1,11 +1,3 @@
-/* Generic HTML styling */
-body {
-  background-image: url("images/back.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-}
-
 .user-section p {
   color: white;
   display: flex;

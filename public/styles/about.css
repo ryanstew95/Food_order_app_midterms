@@ -20,7 +20,7 @@
 }
 
 #description {
-  float: right;
+  padding-left: 50px;
   width: 400px;
   /* Adjust the width as per your image size */
   margin: 0 10px 10px 0;
@@ -38,11 +38,10 @@ img {
   /* Add some margin to create space between the image and other elements */
 }
 
-/* CSS styles for the colored square */
+/* the team photo */
 .colored-square {
   width: 450px;
   height: 400px;
-  background-color: #fce5cc;
   margin: 10px;
 }
 
