@@ -8,7 +8,3 @@ const getUsers = () => {
 };
 
 module.exports = { getUsers };
-
-
-// comfortable retrieving data from datables
-// add in new files in queries like users.js eg food item query
