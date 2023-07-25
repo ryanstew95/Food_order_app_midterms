@@ -51,3 +51,146 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+const  pool  = require('./db/connection');
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// LOGIN //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+app.post('/login', async(req, res) => {
+
+  // eslint-disable-next-line camelcase
+  const { user_id } = req.body;
+  console.log('User ID:', user_id);
+
+  try {
+    const query = 'SELECT * FROM users WHERE id = $1';
+
+    // eslint-disable-next-line camelcase
+    const result = await pool.query(query, [user_id]);
+
+    if (result.rows.length === 1) {
+      // Get the user object from the query result
+      const user = result.rows[0];
+
+      if (user.isemployee) {
+        // User is an employee, render the order page
+        res.redirect('/orders');
+      } else {
+        // User is not an employee, render the main page
+        res.render('index', { user });
+      }
+    } else {
+      // Failed login, redirect back to the login page with an error message
+      res.status(400).send('Invalid user ID. Please try again.');
+    }
+  } catch (error) {
+    console.error('Error executing the query:', error);
+    res.render('login', { error: 'An error occurred. Please try again later.' });
+  }
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// ORDERS //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+app.get('/orders', async(req, res) => {
+  try {
+    // Fetch all rows from the orders table
+    const query = 'SELECT * FROM orders';
+    const result = await pool.query(query);
+    const orders = result.rows;
+
+    console.log('orders:', orders);
+
+    // Render the 'orders.ejs' template and pass the orders data
+    res.render('orders', { orders }); // Change 'users' to 'orders'
+  } catch (error) {
+    console.error('Error executing the query:', error);
+    res.render('orders', { orders: [], error: 'An error occurred while fetching orders.' }); // Change 'users' to 'orders'
+  }
+});
+// Route to display a specific order by its id
+app.get('/orders/:id', async(req, res) => {
+  const orderId = req.params.id;
+
+  try {
+    // Fetch the order from the orders table by its id
+    const query = 'SELECT * FROM orders WHERE id = $1';
+    const result = await pool.query(query, [orderId]);
+    const orders = result.rows[0];
+
+    // Render the 'order.ejs' template and pass the order data
+    res.render('orders', { orders });
+  } catch (error) {
+    console.error('Error executing the query:', error);
+    res.render('orders', { orders: null, error: 'An error occurred while fetching the order.' });
+  }
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// MAIN //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+app.get('/main', async(req, res) => {
+  const { user } = req.session;
+  res.render('index', { user });
+});
+app.get('/continue-shopping', (req, res) => {
+  // Redirect the user back to the main page
+  res.redirect('/main');
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// Add the sign-out route //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+app.post('/logout', (req, res) => {
+  // Destroy the session to sign the user out
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying session:', err);
+    }
+    // Redirect the user back to the main page after signing out
+    res.redirect('/main');
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// CART //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+app.get('/cart', (req, res) => {
+  res.render('cart');
+});
+
+// Define the route to handle cart item addition
+app.post('/cart/add', (req, res) => {
+// handle adding items to cart
+});
+
+// checkout
+app.post('/cart/checkout', (req, res) => {
+  res.render('check-out');
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// CART //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// about
+app.get('/about', (req, res) => {
+  res.render('about');
+});
+/**
+ Login Page:
+[x] GET /login: Display the login page to the user.
+[x] POST /login: Handle the form submission when the user tries to log in.
+Main Page:
+[x] GET /main: Display the main page of your food app, showing various food items or categories.
+Orders Page (for viewing incoming orders):
+[x] GET /orders: Display incoming orders for workers to see.
+[x] GET /orders/:id: Display details of a specific order with ID :id.
+About Page:
+[] GET /about: Display information about your food app or your restaurant.
+Cart Page:
+[x] GET /cart: Display the contents of the user's shopping cart.
+[] POST /cart/add: Handle the addition of items to the cart.
+[] POST /cart/remove/:id: Handle the removal of a specific item with ID :id from the cart.
+[] POST /cart/checkout: Handle the checkout process and payment.
+contact us:
+[] POST /submit_form
+ */
+
