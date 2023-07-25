@@ -1,7 +1,7 @@
-DROP TABLE order_items;
-DROP TABLE orders;
-DROP TABLE food_items;
-DROP TABLE users;
+DROP TABLE IF EXISTS order_items CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS food_items CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
@@ -14,14 +14,17 @@ CREATE TABLE food_items (
   name VARCHAR(255),
   price DECIMAL(10, 2),
   photo_url VARCHAR(255),
-  description VARCHAR(255)
+  description TEXT
 );
 
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   active BOOLEAN,
-  estimated_time_minutes INT
+  estimated_time_minutes INT,
+  date_created TIMESTAMP,
+  date_accepted TIMESTAMP,
+  date_completed TIMESTAMP
 );
 
 CREATE TABLE order_items (
