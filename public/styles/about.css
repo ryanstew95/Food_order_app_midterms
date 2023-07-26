@@ -20,7 +20,7 @@
 }
 
 #description {
-  float: right;
+  padding-left: 50px;
   width: 400px;
   /* Adjust the width as per your image size */
   margin: 0 10px 10px 0;
@@ -38,10 +38,45 @@ img {
   /* Add some margin to create space between the image and other elements */
 }
 
-/* CSS styles for the colored square */
+/* the team photo */
 .colored-square {
   width: 450px;
   height: 400px;
-  background-color: #fce5cc;
   margin: 10px;
+}
+
+.menu-section {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-btn {
+  font-size: 34px;
+  cursor: pointer;
+  color: white;
+  margin: 60px;
+  font-weight: 900;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  left: 0;
+  top: 100%;
+  z-index: 1;
+  background-color: #fcfafa;
+  box-shadow: 0px 8px 16px 0px #02fb7a;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  text-shadow: 0px 0px 2px black;
+  font-family: "Lobster", cursive;
+}
+
+.menu-section:hover .dropdown-content {
+  display: block;
 }

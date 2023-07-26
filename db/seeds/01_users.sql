@@ -19,7 +19,7 @@ INSERT INTO food_items
 ('Fries', 22.00, '/images/combo1.png', 'Who can resist our golden Fries? Fried to perfection and lightly salted, they''re the perfect side dish or a delicious snack on their own. Don''t forget the ketchup!'),
 ('Combo 1', 30.00, '/images/combo1.png', 'Indulge in our Combo 1 for the perfect meal! You get our signature Italian Burger, a serving of crispy golden Fries, and your choice of a refreshing drink. It''s the ultimate meal deal!'),
 ('Combo 2', 18.99, 'images/combo2.jpeg', 'Dive into our Combo 2 for an unforgettable meal experience! Enjoy a slice of our delightful Pizza, accompanied by a fresh green salad, and wash it all down with a refreshing Mojito. The perfect combo to satisfy your hunger!'),
-('combo 3', 20.99, '/images/combo3.jpeg', 'Savor the flavors of the North with our Combo 3! This meal includes our North Indian Thali, featuring a variety of delectable dishes such as dal makhani, paneer butter masala, mix veg, jeera rice, raita, naan, and a sweet dessert. It''s a feast that''s sure to please!');
+('Combo 3', 20.99, '/images/combo3.jpeg', 'Savor the flavors of the North with our Combo 3! This meal includes our North Indian Thali, featuring a variety of delectable dishes such as dal makhani, paneer butter masala, mix veg, jeera rice, raita, naan, and a sweet dessert. It''s a feast that''s sure to please!');
 
 
 INSERT INTO orders
