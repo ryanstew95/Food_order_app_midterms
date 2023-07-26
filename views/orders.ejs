@@ -1,25 +1,27 @@
-<!-- this need to be replaced with the actual
-orders page, temp page  -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Orders</title>
+  <title>Orders</title>
+
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/public/styles/main.css" />
+  <link rel="stylesheet" href="/public/styles/layout.css" />
+  <link rel="stylesheet" href="/public/styles/orders.css" />
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/orders.js"></script>
 </head>
+
 <body>
-  <h1>User Orders</h1>
-  <% if (orders && orders.length > 0) { %> <!-- Check if orders exists and has items -->
-    <ul>
-      <% orders.forEach(order => { %>
-        <li>Order ID: <%= order.id %>, User ID: <%= order.user_id %>, Active: <%= order.active %>, Estimated Time: <%= order.estimated_time_minutes %> minutes</li>
-      <% }); %>
-    </ul>
-  <% } else { %>
-    <p>No orders available.</p> <!-- Display a message when there are no orders -->
-  <% } %>
+  <h1>Orders</h1>
+  <button id="fetch-orders">Fetch Orders via AJAX</button>
+  <ul id="orders"></ul>
 </body>
+
 </html>
-
-
-
