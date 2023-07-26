@@ -82,7 +82,7 @@ const pool = new Pool({
 app.post('/login', async(req, res) => {
 
   // eslint-disable-next-line camelcase
-  const { user_id } = req.body;
+  const  user_id  = req.body.user_id;
   console.log('User ID:', user_id);
 
   try {
@@ -152,7 +152,7 @@ app.get('/orders/:id', async(req, res) => {
 // MAIN //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 app.get('/main', async(req, res) => {
-  const { user } = req.session;
+  const  user  = req.session.user;
   res.render('index', { user });
 });
 app.get('/continue-shopping', (req, res) => {
