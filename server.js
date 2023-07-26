@@ -41,16 +41,20 @@ app.use(
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
+const orderApiRoutes = require('./routes/orders-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
+const ordersRoutes = require('./routes/orders');
 const cartRoutes = require('./routes/cart');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', userApiRoutes);
+app.use('/api/orders', orderApiRoutes);
 app.use('/api/widgets', widgetApiRoutes); // instead of app.get but route.get - represents widget data eg cart info
 app.use('/users', usersRoutes);
+app.use('/orders', ordersRoutes);
 // eslint-disable-next-line no-undef
 app.use('/cart', cartRoutes);
 // Note: mount other resources here, using the same pattern above
@@ -111,43 +115,6 @@ app.post('/login', async(req, res) => {
     res.render('login', { error: 'An error occurred. Please try again later.' });
   }
 });
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-// ORDERS //
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-app.get('/orders', async(req, res) => {
-  try {
-    // Fetch all rows from the orders table
-    const query = 'SELECT * FROM orders';
-    const result = await pool.query(query);
-    const orders = result.rows;
-
-    console.log('orders:', orders);
-
-    // Render the 'orders.ejs' template and pass the orders data
-    res.render('orders', { orders }); // Change 'users' to 'orders'
-  } catch (error) {
-    console.error('Error executing the query:', error);
-    res.render('orders', { orders: [], error: 'An error occurred while fetching orders.' }); // Change 'users' to 'orders'
-  }
-});
-// Route to display a specific order by its id
-app.get('/orders/:id', async(req, res) => {
-  const orderId = req.params.id;
-
-  try {
-    // Fetch the order from the orders table by its id
-    const query = 'SELECT * FROM orders WHERE id = $1';
-    const result = await pool.query(query, [orderId]);
-    const orders = result.rows[0];
-
-    // Render the 'order.ejs' template and pass the order data
-    res.render('orders', { orders });
-  } catch (error) {
-    console.error('Error executing the query:', error);
-    res.render('orders', { orders: null, error: 'An error occurred while fetching the order.' });
-  }
-});
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // MAIN //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
