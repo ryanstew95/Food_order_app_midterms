@@ -1,18 +1,18 @@
 /*
- * All routes for User Data are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /api/users
+ * All routes for Order Data are defined here
+ * Since this file is loaded in server.js into api/orders,
+ *   these routes are mounted onto /api/orders
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
 const express = require('express');
 const router  = express.Router();
-const userQueries = require('../db/queries/users');
+const orderQueries = require('../db/queries/orders');
 
 router.get('/', (req, res) => {
-  userQueries.getUsers()
-    .then(users => {
-      res.json({ users });
+  orderQueries.getOrders()
+    .then(orders => {
+      res.json({ orders });
     })
     .catch(err => {
       res

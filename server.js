@@ -1,11 +1,9 @@
-const { Pool } = require('pg');
 // load .env data into process.env
 require('dotenv').config();
 
 // Web server config
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
-const session = require('express-session');
 const morgan = require('morgan');
 
 const PORT = process.env.PORT || 8080;
@@ -28,52 +26,37 @@ app.use(
 );
 app.use(express.static('public'));
 
-// Set up session middleware
-app.use(
-  session({
-    secret: 'tyh6v3rg',
-    resave: false,
-    saveUninitialized: true,
-  })
-);
-
-
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
+const orderApiRoutes = require('./routes/orders-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
-const cartRoutes = require('./routes/cart');
+const ordersRoutes = require('./routes/orders');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', userApiRoutes);
-app.use('/api/widgets', widgetApiRoutes); // instead of app.get but route.get - represents widget data eg cart info
+app.use('/api/orders', orderApiRoutes);
+app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
-// eslint-disable-next-line no-undef
-app.use('/cart', cartRoutes);
+app.use('/orders', ordersRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-// listener
-app.listen(PORT, () => {
-  console.log(`food order app listening on port ${PORT}`);
+app.get('/', (req, res) => {
+  res.render('index');
 });
 
-// pretty sure this is in another file location
-// and I can export it in... need mentor help
-//db/queries/conection.js
-const pool = new Pool({
-  user: 'labber',
-  host: 'localhost',
-  database: 'midterm',
-  password: 'labber',
-  port: 5432,
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`);
 });
+
+const  pool  = require('./db/connection');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // LOGIN //
