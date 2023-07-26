@@ -195,6 +195,7 @@ app.post('/cart/checkout', (req, res) => {
 app.get('/about', (req, res) => {
   res.render('about');
 });
+
 /**
  Login Page:
 [x] GET /login: Display the login page to the user.
