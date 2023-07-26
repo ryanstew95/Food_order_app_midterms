@@ -130,6 +130,27 @@ app.get('/orders', async(req, res) => {
     res.render('orders', { orders: [], error: 'An error occurred while fetching orders.' }); // Change 'users' to 'orders'
   }
 });
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// menu //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+app.get('/main', async(req, res) => {
+  const { user } = req.session;
+  // res.render('index', { user });
+  try {
+    // Fetch all rows from the orders table
+    const query = 'SELECT * FROM food_items';
+    const result = await pool.query(query);
+    const foodItems = result.rows;
+
+    console.log('food:', foodItems);
+
+    // Render the 'index.ejs' template and pass the food data
+    res.render('index', { foodItems, user });
+  } catch (error) {
+    console.error('Error executing the query:', error);
+    res.render('index', { foodItems: [], error: 'An error occurred while fetching foodItems.', user });
+  }
+});
 // Route to display a specific order by its id
 app.get('/orders/:id', async(req, res) => {
   const orderId = req.params.id;
@@ -151,10 +172,10 @@ app.get('/orders/:id', async(req, res) => {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // MAIN //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-app.get('/main', async(req, res) => {
-  const { user } = req.session;
-  res.render('index', { user });
-});
+// app.get('/main', async(req, res) => {
+//   const { user } = req.session;
+//   res.render('index', { user });
+// });
 app.get('/continue-shopping', (req, res) => {
   // Redirect the user back to the main page
   res.redirect('/main');
