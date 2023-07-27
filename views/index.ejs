@@ -51,14 +51,14 @@
     <ul>
       <div class="container" id="menu">
       <% foodItems.forEach(foodItem => { %>
-        <div class="food-item" id="food">
+        <div class="food-item" id="<%= foodItem.id %>">
           <img src="<%= foodItem.photo_url %>" alt="<%= foodItem.name %>">
           <h3><%= foodItem.name %></h3>
           <p>$<%= foodItem.price %></p>
           <form method="POST" action="/cart">
             <input name="order_id" value="" hidden>
             <input name="food_id" value="<%= foodItem.id %>" hidden>
-          <button type="submit" class="submit-button">Add to Cart</button>
+          <button type="submit" class="submit-button" data-item-id="<%= foodItem.id %>">Add to Cart</button>
         </form>
           <output name="counter" class="counter" id="cart-count"></output>
           <div class="description">
@@ -195,7 +195,7 @@
     </div>
 
     <script src="scripts/icon.js"></script>
-    <script src="scripts/cart.js"></script>
+    <script src="scripts/menu.js"></script>
 </body>
 </html>
 
