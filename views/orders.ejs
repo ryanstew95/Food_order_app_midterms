@@ -21,7 +21,20 @@
 <body>
   <h1>Orders</h1>
   <button id="fetch-orders">Fetch Orders via AJAX</button>
-  <ul id="orders"></ul>
+  <div>
+    <button class="ordertabs" id="defaultTab" onclick="openTab(event, 'orders-active')">current orders</button>
+    <button class="ordertabs" onclick="openTab(event, 'orders-history')">order history</button>
+  </div>
+  <container id="orders-container">
+    <section id="orders-active">
+      <ul id="orders-pending"></ul>
+      <ul id="orders-progress"></ul>
+    </section>
+    <section id="orders-history">
+      <ul id="orders-completed"></ul>
+      <ul id="orders-cancelled"></ul>
+    </section>
+  </container>
 </body>
 
 </html>

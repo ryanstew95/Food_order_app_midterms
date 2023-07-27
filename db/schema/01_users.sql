@@ -20,11 +20,11 @@ CREATE TABLE food_items (
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  active BOOLEAN,
+  active BOOLEAN NOT NULL DEFAULT true,
   estimated_time_minutes INT,
-  date_created TIMESTAMP,
-  date_accepted TIMESTAMP,
-  date_completed TIMESTAMP
+  date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  date_accepted TIMESTAMP DEFAULT NULL,
+  date_completed TIMESTAMP DEFAULT NULL
 );
 
 CREATE TABLE order_items (
