@@ -49,12 +49,17 @@
   <div class="menu-items">
   <% if (foodItems && foodItems.length > 0) { %>
     <ul>
+      <div class="container" id="menu">
       <% foodItems.forEach(foodItem => { %>
         <div class="food-item" id="food">
           <img src="<%= foodItem.photo_url %>" alt="<%= foodItem.name %>">
           <h3><%= foodItem.name %></h3>
           <p>$<%= foodItem.price %></p>
+          <form method="POST" action="/cart">
+            <input name="order_id" value="" hidden>
+            <input name="food_id" value="<%= foodItem.id %>" hidden>
           <button type="submit" class="submit-button">Add to Cart</button>
+        </form>
           <output name="counter" class="counter" id="cart-count"></output>
           <div class="description">
               <p><%= foodItem.description %></p>
@@ -63,6 +68,7 @@
       <% }); %>
     </ul>
   <% } %>
+</div>
 </div>
     <!-- <div class="container" id="menu">
 

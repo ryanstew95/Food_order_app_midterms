@@ -200,10 +200,7 @@ app.get('/cart', (req, res) => {
   res.render('cart');
 });
 
-// Define the route to handle cart item addition
-app.post('/cart/add', (req, res) => {
-// handle adding items to cart
-});
+
 
 // checkout
 app.post('/cart/checkout', (req, res) => {
