@@ -41,16 +41,20 @@ app.use(
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
+const orderApiRoutes = require('./routes/orders-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
+const ordersRoutes = require('./routes/orders');
 const cartRoutes = require('./routes/cart');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', userApiRoutes);
+app.use('/api/orders', orderApiRoutes);
 app.use('/api/widgets', widgetApiRoutes); // instead of app.get but route.get - represents widget data eg cart info
 app.use('/users', usersRoutes);
+app.use('/orders', ordersRoutes);
 // eslint-disable-next-line no-undef
 app.use('/cart', cartRoutes);
 // Note: mount other resources here, using the same pattern above
@@ -205,4 +209,33 @@ app.get('/about', (req, res) => {
   res.render('about');
 });
 
+app.post('/submit_form', (req, res) => {
+  // Handle the form submission
+  // req.body will contain the form data
+
+
+  console.log(req.body); // This will log the form data to your console
+
+  // After handling the data, send a response to the client
+  res.send('Form data received.');
+});
+/**
+ Login Page:
+[x] GET /login: Display the login page to the user.
+[x] POST /login: Handle the form submission when the user tries to log in.
+Main Page:
+[x] GET /main: Display the main page of your food app, showing various food items or categories.
+Orders Page (for viewing incoming orders):
+[x] GET /orders: Display incoming orders for workers to see.
+[x] GET /orders/:id: Display details of a specific order with ID :id.
+About Page:
+[] GET /about: Display information about your food app or your restaurant.
+Cart Page:
+[x] GET /cart: Display the contents of the user's shopping cart.
+[] POST /cart/add: Handle the addition of items to the cart.
+[] POST /cart/remove/:id: Handle the removal of a specific item with ID :id from the cart.
+[] POST /cart/checkout: Handle the checkout process and payment.
+contact us:
+[x] POST /submit_form
+ */
 
