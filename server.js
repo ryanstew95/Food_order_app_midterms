@@ -163,6 +163,16 @@ app.get('/about', (req, res) => {
   res.render('about');
 });
 
+app.post('/submit_form', (req, res) => {
+  // Handle the form submission
+  // req.body will contain the form data
+
+
+  console.log(req.body); // This will log the form data to your console
+
+  // After handling the data, send a response to the client
+  res.send('Form data received.');
+});
 /**
  Login Page:
 [x] GET /login: Display the login page to the user.
@@ -180,6 +190,6 @@ Cart Page:
 [] POST /cart/remove/:id: Handle the removal of a specific item with ID :id from the cart.
 [] POST /cart/checkout: Handle the checkout process and payment.
 contact us:
-[] POST /submit_form
+[x] POST /submit_form
  */
 
