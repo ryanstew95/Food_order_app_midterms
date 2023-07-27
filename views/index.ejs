@@ -46,9 +46,31 @@
       </section>
       <div class="clear"></div>
   </div>
-
-
-    <div class="container" id="menu">
+  <div class="menu-items">
+  <% if (foodItems && foodItems.length > 0) { %>
+    <ul>
+      <div class="container" id="menu">
+      <% foodItems.forEach(foodItem => { %>
+        <div class="food-item" id="<%= foodItem.id %>">
+          <img src="<%= foodItem.photo_url %>" alt="<%= foodItem.name %>">
+          <h3><%= foodItem.name %></h3>
+          <p>$<%= foodItem.price %></p>
+          <form method="POST" action="/cart">
+            <input name="order_id" value="" hidden>
+            <input name="food_id" value="<%= foodItem.id %>" hidden>
+          <button type="submit" class="submit-button" data-item-id="<%= foodItem.id %>">Add to Cart</button>
+        </form>
+          <output name="counter" class="counter" id="cart-count"></output>
+          <div class="description">
+              <p><%= foodItem.description %></p>
+          </div>
+      </div>
+      <% }); %>
+    </ul>
+  <% } %>
+</div>
+</div>
+    <!-- <div class="container" id="menu">
 
       <div class="food-item" id="italian-burger">
         <img src="images/italianburger.jpg" alt="Italian burger">
@@ -144,7 +166,7 @@
           <p>Savor the flavors of the North with our Combo 3! This meal includes our North Indian Thali, featuring a variety of delectable dishes such as dal makhani, paneer butter masala, mix veg, jeera rice, raita, naan, and a sweet dessert. It's a feast that's sure to please!</p>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="contact-section">
       <div class="contact-us" id="contact-us">
@@ -173,7 +195,7 @@
     </div>
 
     <script src="scripts/icon.js"></script>
-    <script src="scripts/cart.js"></script>
+    <script src="scripts/menu.js"></script>
 </body>
 </html>
 

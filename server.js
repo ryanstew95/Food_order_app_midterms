@@ -82,7 +82,6 @@ const pool = new Pool({
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // LOGIN //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
 app.post('/login', async(req, res) => {
 
   // eslint-disable-next-line camelcase
@@ -103,8 +102,8 @@ app.post('/login', async(req, res) => {
         // User is an employee, render the order page
         res.redirect('/orders');
       } else {
-        // User is not an employee, render the main page
-        res.render('index', { user });
+        req.session.user = user;
+        res.redirect('/main');
       }
     } else {
       // Failed login, redirect back to the login page with an error message
@@ -115,13 +114,66 @@ app.post('/login', async(req, res) => {
     res.render('login', { error: 'An error occurred. Please try again later.' });
   }
 });
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// ORDERS //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+app.get('/orders', async(req, res) => {
+  try {
+    // Fetch all rows from the orders table
+    const query = 'SELECT * FROM orders';
+    const result = await pool.query(query);
+    const orders = result.rows;
+
+    console.log('orders:', orders);
+
+    // Render the 'orders.ejs' template and pass the orders data
+    res.render('orders', { orders }); // Change 'users' to 'orders'
+  } catch (error) {
+    console.error('Error executing the query:', error);
+    res.render('orders', { orders: [], error: 'An error occurred while fetching orders.' }); // Change 'users' to 'orders'
+  }
+});
+
+// // Route to display a specific order by its id
+// app.get('/orders/:id', async(req, res) => {
+//   const orderId = req.params.id;
+
+//   try {
+//     // Fetch the order from the orders table by its id
+//     const query = 'SELECT * FROM orders WHERE id = $1';
+//     const result = await pool.query(query, [orderId]);
+//     const orders = result.rows[0];
+
+//     // Render the 'order.ejs' template and pass the order data
+//     res.render('orders', { orders });
+//   } catch (error) {
+//     console.error('Error executing the query:', error);
+//     res.render('orders', { orders: null, error: 'An error occurred while fetching the order.' });
+//   }
+// });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // MAIN //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-app.get('/main', async(req, res) => {
-  const { user } = req.session;
-  res.render('index', { user });
+app.get('/main', async (req, res) => {
+  const { user } = req.session; // Access user data from the session
+
+  try {
+    // Fetch all rows from the orders table
+    const query = 'SELECT * FROM food_items';
+    const result = await pool.query(query);
+    const foodItems = result.rows;
+
+    console.log('food:', foodItems);
+
+    // Render the 'index.ejs' template and pass the food data
+    res.render('index', { foodItems, user });
+  } catch (error) {
+    console.error('Error executing the query:', error);
+    res.render('index', { foodItems: [], error: 'An error occurred while fetching foodItems.', user });
+  }
 });
+
 app.get('/continue-shopping', (req, res) => {
   // Redirect the user back to the main page
   res.redirect('/main');
@@ -146,19 +198,13 @@ app.get('/cart', (req, res) => {
   res.render('cart');
 });
 
-// Define the route to handle cart item addition
-app.post('/cart/add', (req, res) => {
-// handle adding items to cart
-});
-
 // checkout
 app.post('/cart/checkout', (req, res) => {
   res.render('check-out');
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-// CART //
+// ABOUT //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-// about
 app.get('/about', (req, res) => {
   res.render('about');
 });

@@ -5,11 +5,11 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require('express');
-const router  = express.Router();
-const userQueries = require('../db/queries/users');
-const foodItemsQueries = require('../db/queries/food_items')
-const cartItemQueries = require('../db/queries/cart_items')
+const express = require("express");
+const router = express.Router();
+const userQueries = require("../db/queries/users");
+const foodItemsQueries = require("../db/queries/food_items");
+const cartItemQueries = require("../db/queries/cart_items");
 // router.get('/', (req, res) => {
 //   foodItemsQueries.getFoodItems()
 //   .then(users => {
@@ -32,17 +32,15 @@ const cartItemQueries = require('../db/queries/cart_items')
 //     });
 // });
 
-router.get('/', (req, res) => {
-  cartItemQueries.findCartItem(1)
-  .then(users => {
-    res.json({ users });
-  })
-  .catch(err => {
-    res
-      .status(500)
-      .json({ error: err.message });
-  });
-
+router.get("/", (req, res) => {
+  cartItemQueries
+    .findCartItem(1)
+    .then((users) => {
+      res.json({ users });
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
 });
 
 // router.post
