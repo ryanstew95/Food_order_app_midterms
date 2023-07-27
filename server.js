@@ -130,8 +130,26 @@ app.get('/orders', async(req, res) => {
     res.render('orders', { orders: [], error: 'An error occurred while fetching orders.' }); // Change 'users' to 'orders'
   }
 });
+
+// // Route to display a specific order by its id
+// app.get('/orders/:id', async(req, res) => {
+//   const orderId = req.params.id;
+
+//   try {
+//     // Fetch the order from the orders table by its id
+//     const query = 'SELECT * FROM orders WHERE id = $1';
+//     const result = await pool.query(query, [orderId]);
+//     const orders = result.rows[0];
+
+//     // Render the 'order.ejs' template and pass the order data
+//     res.render('orders', { orders });
+//   } catch (error) {
+//     console.error('Error executing the query:', error);
+//     res.render('orders', { orders: null, error: 'An error occurred while fetching the order.' });
+//   }
+// });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-// main //
+// MAIN //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 app.get('/main', async (req, res) => {
   const { user } = req.session; // Access user data from the session
@@ -151,24 +169,6 @@ app.get('/main', async (req, res) => {
     res.render('index', { foodItems: [], error: 'An error occurred while fetching foodItems.', user });
   }
 });
-
-// // Route to display a specific order by its id
-// app.get('/orders/:id', async(req, res) => {
-//   const orderId = req.params.id;
-
-//   try {
-//     // Fetch the order from the orders table by its id
-//     const query = 'SELECT * FROM orders WHERE id = $1';
-//     const result = await pool.query(query, [orderId]);
-//     const orders = result.rows[0];
-
-//     // Render the 'order.ejs' template and pass the order data
-//     res.render('orders', { orders });
-//   } catch (error) {
-//     console.error('Error executing the query:', error);
-//     res.render('orders', { orders: null, error: 'An error occurred while fetching the order.' });
-//   }
-// });
 
 app.get('/continue-shopping', (req, res) => {
   // Redirect the user back to the main page
@@ -194,37 +194,15 @@ app.get('/cart', (req, res) => {
   res.render('cart');
 });
 
-
-
 // checkout
 app.post('/cart/checkout', (req, res) => {
   res.render('check-out');
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-// CART //
+// ABOUT //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-// about
 app.get('/about', (req, res) => {
   res.render('about');
 });
 
-/**
- Login Page:
-[x] GET /login: Display the login page to the user.
-[x] POST /login: Handle the form submission when the user tries to log in.
-Main Page:
-[x] GET /main: Display the main page of your food app, showing various food items or categories.
-Orders Page (for viewing incoming orders):
-[x] GET /orders: Display incoming orders for workers to see.
-[x] GET /orders/:id: Display details of a specific order with ID :id.
-About Page:
-[] GET /about: Display information about your food app or your restaurant.
-Cart Page:
-[x] GET /cart: Display the contents of the user's shopping cart.
-[] POST /cart/add: Handle the addition of items to the cart.
-[] POST /cart/remove/:id: Handle the removal of a specific item with ID :id from the cart.
-[] POST /cart/checkout: Handle the checkout process and payment.
-contact us:
-[] POST /submit_form
- */
 
