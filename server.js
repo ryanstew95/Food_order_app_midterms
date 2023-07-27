@@ -8,8 +8,9 @@ const express = require('express');
 const session = require('express-session');
 const morgan = require('morgan');
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 const app = express();
+
 
 app.set('view engine', 'ejs');
 
@@ -43,15 +44,23 @@ app.use(
 const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
-const cartRoutes = require('./routes/cart');
+const cartRoutes = require('./routes/cart1');
+//const checkoutRoutes = require('./routes/cart1/checkout1');
+const indexRoutes = require('./routes/index1');
+
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', userApiRoutes);
-app.use('/api/widgets', widgetApiRoutes); // instead of app.get but route.get - represents widget data eg cart info
+app.use('/api/widgets', widgetApiRoutes); // instead of app.get but route.get - represents widget data eg cart data
 app.use('/users', usersRoutes);
-app.use('/cart', cartRoutes);
+app.use('/cart1', cartRoutes);
+//app.use('/cart1/checkout1', checkoutRoutes);
+app.use('/index1', indexRoutes);
+
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -81,14 +90,6 @@ const pool = new Pool({
   port: 5432,
 });
 
-app.get('/index1', (req, res) => {
-  res.render('index1');
-});
-
-app.post('/index1', (req, res) => {
-  res.render('index1');
-
-});
 
 app.post('/index', async (req, res) => {
   const { user_id } = req.body;
@@ -142,18 +143,18 @@ app.get('/orders', async (req, res) => {
 });
 
 
-
-
-app.get('/cart1', (req, res) => {
-  res.render('cart1');
-});
-
-app.post('/cart1', (req, res) => {
-  res.render('cart1');
-});
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-// ORDERS //
+// index1 placeholder //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+app.get('/index1'), (req, res) => {
+  res.render('index1');
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// index1 placeholder //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // MAIN //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////

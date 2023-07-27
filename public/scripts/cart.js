@@ -103,26 +103,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-// see if cart submit icon route still works reagrless of below
-// see how above function is working !!!!!!! Maybe as Sourav in the meeting and if
-//thats something I will have to adjust with the routes or with the backend
-
-// This is outside the DOMContentLoaded event listener
-//let cartBtn = document.getElementById("cart-btn");
-// if (cartBtn) {
-//     cartBtn.onclick = function() {
-//         window.location.href = 'cart.html'; // maybe use jquery event function then make get request?
-//     }
-// }
-
-// let cartBtn = document.getElementById("cart-btn");
-// if (cartBtn) {
-//     cartBtn.onclick = function() {
-//       document.querySelector("cart-btn").submit(); // maybe use jquery event function then make get request?
-//     }
-// }
-
-// var cartBtn = document.querySelector("cart-btn");
-// cartBtn.addEventListener(function() {
-//   document.querySelector("cart-btn").submit();
-// });
+//This is outside the DOMContentLoaded event listener
+let cartBtn = document.getElementById("cart-btn");
+if (cartBtn) {
+    cartBtn.onclick = function() {
+        window.location.href = 'cart.html'; // maybe use jquery event function then make get request?
+    }
+}

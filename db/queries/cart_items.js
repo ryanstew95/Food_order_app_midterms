@@ -34,7 +34,16 @@ const deleteCartItem = (itemId) => {
       return data.rows;
     });
 };
+const addCarttoOrder = function (cartOrder) {
+  return db
+  .query(`INSERT INTO orders (user_id, active, estimated_time_minutes) VALUES ($1, $2, $3) RETURNING *;`, [cartOrder.user_id, cartOrder.active, cartOrder.estimated_time_minutes]) //add in sql injection prevention?
+    .then(data => {
+      console.log(data.rows)
+      return data.rows[0];
+    });
+}
 
+//addCarttoOrder(3, true, 20);
 //deleteCartItem(15);
 //addCartItem()
 // any advantage of value const updateCart = (itemId) => {
@@ -48,4 +57,4 @@ const deleteCartItem = (itemId) => {
 
 
 
-module.exports = { getCartItems, findCartItem, addCartItem,  deleteCartItem  };
+module.exports = { getCartItems, findCartItem, addCartItem,  deleteCartItem, addCarttoOrder};

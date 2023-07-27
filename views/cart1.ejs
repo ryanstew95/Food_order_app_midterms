@@ -19,12 +19,13 @@
                 <h2 id="total"></h2>
             </div>
             <div class="actions">
-              <form method="POST" action="/index1">
-              <button type="submit">Continue SHopping</button>
+              <form id="continue-btn" method="POST" action="/index1">
+              <button type="submit" name="continue" value="continue">Continue Shopping</button>
               </form>
-
-                <button onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
-            </div>
+                <form id="proceed-btn" method="POST" action="/cart1">
+                  <button type="submit" name="proceed" value="proceed">Proceed To Checkout</button>
+                </form>
+              </div>
         </div>
     </main>
     <footer>
