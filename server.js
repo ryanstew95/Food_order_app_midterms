@@ -8,8 +8,9 @@ const express = require('express');
 const session = require('express-session');
 const morgan = require('morgan');
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 const app = express();
+
 
 app.set('view engine', 'ejs');
 
@@ -111,7 +112,7 @@ app.post('/login', async(req, res) => {
     }
   } catch (error) {
     console.error('Error executing the query:', error);
-    res.render('login', { error: 'An error occurred. Please try again later.' });
+    res.render('login1', { error: 'An error occurred. Please try again later.' });
   }
 });
 
@@ -194,14 +195,14 @@ app.post('/logout', (req, res) => {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // CART //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-app.get('/cart', (req, res) => {
-  res.render('cart');
-});
+// app.get('/cart', (req, res) => {
+//   res.render('cart');
+// });
 
-// checkout
-app.post('/cart/checkout', (req, res) => {
-  res.render('check-out');
-});
+// // checkout
+// app.post('/cart/checkout', (req, res) => {
+//   res.render('check-out');
+// });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // ABOUT //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////

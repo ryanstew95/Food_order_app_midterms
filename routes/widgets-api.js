@@ -8,6 +8,7 @@
 const express = require('express');
 const router  = express.Router();
 const db = require('../db/connection');
+const dbFoodQuery = require('../db/queries/food_items')
 
 router.get('/', (req, res) => {
   const query1 = `SELECT order_items.id, food_items.name, food_items.price
