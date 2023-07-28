@@ -17,6 +17,7 @@ $(() => {
 
   // Form submission code
   $('#contact-form').on('submit', function(event) {
+    console.log('inside submit handle');
     event.preventDefault();
 
     let name = $('#name').val();
