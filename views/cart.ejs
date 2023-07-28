@@ -3,6 +3,7 @@
 <head>
     <title>Cart Summary</title>
     <link rel="stylesheet" type="text/css" href="styles/cart.css">
+    <script src="/vendor/jquery-3.0.0.js"></script>
 </head>
 <body>
     <header>
@@ -23,9 +24,7 @@
               <form method="GET" action="/main">
                 <button>Continue Shopping</button>
               </form>
-              <form method="POST" action="/cart/checkout">
-                <button>Proceed to Checkout</button>
-              </form>
+                <button id="place-order">Place order</button>
             </div>
         </div>
     </main>

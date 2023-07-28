@@ -34,7 +34,7 @@ function addToCart(itemId) {
         cart[existingItemIndex].quantity++;
     } else {
         // Otherwise, add the item to the cart with quantity 1
-        cart.push({title: title, price: price, image: imageSrc, quantity: 1});
+        cart.push({title, price, image: imageSrc, quantity: 1, id: parseInt(itemId, 10)});
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -65,9 +65,9 @@ document.addEventListener("DOMContentLoaded", function() {
             loadCart();
         }
     }
-
     function loadCart() {
       let storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+      console.log("stored cart", storedCart);
       let cartItemsElement = document.getElementById('cart-items');
       let totalElement = document.getElementById('total');
       let total = 0;
@@ -119,3 +119,31 @@ if (cartBtn) {
         window.location.href = 'cart.html'; // maybe use jquery event function then make get request?
     }
 }
+
+// call in using function to grab ids to then identify with database
+// button place order - unique id to access for script / form
+// in script add event listener to button to get all ids from cart - if form  when clicked prevent default
+// make ajax post request - sending food ids in req.body - better to send as an array of IDs
+
+// check post route for /orders to call async query function to create order and order_items
+
+// when promise resolves - render a different template for order confirmation on user side
+
+
+
+  // Existing users fetching code
+  document.getElementById('place-order').addEventListener('click', () => {
+    const foodIds = JSON.parse(localStorage.getItem('cart')).map(foodItem => foodItem.id);
+    $.ajax({
+      method: 'POST',
+      url: '/orders',
+      data: {foodIds}
+    })
+    .done((response) => {
+      window.location.href = "/cart/checkout1"
+      console.log("response", response)
+    })
+    .catch(err => {
+      console.error(err);
+    })
+  });
