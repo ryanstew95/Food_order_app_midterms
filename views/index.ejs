@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Food App</title>
+    <script src="/vendor/jquery-3.0.0.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/mainn.css">
     <link rel="stylesheet" type="text/css" href="styles/custom.css">
     <link rel="stylesheet" type="text/css" href="styles/contact-form.css">
@@ -178,13 +179,16 @@
     </div>
       <div class="contact-form">
         <h2>Leave a Message</h2>
-        <form action="/submit_form" method="post">
+        <form id="contact-form" action="/submit_form" method="post">
           <input type="text" id="name" name="name" placeholder="First Name">
+          <input type="text" id="name" name="name" placeholder="Last Name">
           <input type="text" id="email" name="email" placeholder="Your Email">
           <input type="text" id="phone" name="phone" placeholder="Your Phone Number">
           <textarea id="message" name="message" placeholder="Your Message"></textarea>
           <input type="submit" value="Submit">
         </form>
+        <div id="form-error-message" style="display: none; color: red;"></div>
+        <div id="form-success-message" style="display: none; color: green;"></div>
         <div class="our-contact">
           <h3>Our Contact Information</h3>
           <p>Email: info@example.com</p>
@@ -196,8 +200,9 @@
 
     <script src="scripts/icon.js"></script>
     <script src="scripts/cart.js"></script>
-    <!-- <script src="scripts/menu.js"></script> -->
+    <script src="scripts/users.js"></script>
 </body>
 </html>
+
 
 
