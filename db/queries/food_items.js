@@ -7,5 +7,4 @@ const getFoodItems = () => {
     });
 };
 
-
 module.exports = { getFoodItems };

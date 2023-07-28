@@ -1,4 +1,13 @@
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let cart = [];
+// there's two addToCart functions
+// function addToCart(itemId) {
+//   let item = document.getElementById(itemId);
+//   var title = item.getElementsByTagName("h3")[0].innerText;
+//   var price = item.getElementsByTagName("p")[0].innerText;
+//   cart.push({ title: title, price: price });
+//   console.log(cart);
+//   updateCartCount();
+// }
 
 function updateCartCount() {
     let itemCount = 0;

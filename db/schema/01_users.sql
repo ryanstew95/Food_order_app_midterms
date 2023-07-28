@@ -14,14 +14,17 @@ CREATE TABLE food_items (
   name VARCHAR(255),
   price DECIMAL(10, 2),
   photo_url VARCHAR(255),
-  description VARCHAR(255)
+  description TEXT
 );
 
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  active BOOLEAN,
-  estimated_time_minutes INT
+  active BOOLEAN NOT NULL DEFAULT true,
+  estimated_time_minutes INT,
+  date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  date_accepted TIMESTAMP DEFAULT NULL,
+  date_completed TIMESTAMP DEFAULT NULL
 );
 
 CREATE TABLE order_items (

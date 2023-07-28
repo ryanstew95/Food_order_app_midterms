@@ -1,26 +1,40 @@
-<!-- not using this page any more changed it to
-ejs so we can add js and routes -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Food App</title>
     <link rel="stylesheet" type="text/css" href="styles/mainn.css">
+    <link rel="stylesheet" type="text/css" href="styles/custom.css">
+    <link rel="stylesheet" type="text/css" href="styles/contact-form.css">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  </head>
+</head>
 <body>
   <div class="nav-bar" id="top">
+    <form method="POST" action="/login">
+      <input type="number" name="user_id" placeholder="Enter User ID" />
+      <input type="submit" value="Login" />
+    </form>
+    <% if (user) { %>
+      <div class="user-section">
+          <p>Welcome, <%= user.name %>!</p>
+      </div>
+      <% } %>
+      <form method="POST" action="/logout">
+        <button type="submit">Sign Out</button>
+      </form>
     <div class="menu-section">
         <span id="menu-btn" class="menu-btn">&#9776;</span>
         <div id="dropdown-content" class="dropdown-content">
             <a href="#hero">Home</a>
             <a href="#menu">Menu</a>
             <a href="#contact-us">Contact Us</a>
+            <a href="/about">About</a>
         </div>
     </div>
         <h2>Snack-Bar</h2>
         <div class="cart-section">
+          <form method="GET" action="/cart">
           <button id="cart-btn" class="cart-btn">🛒<span id="cart-count"></span></button>
+        </form>
         </div>
     </div>
 
@@ -32,9 +46,31 @@ ejs so we can add js and routes -->
       </section>
       <div class="clear"></div>
   </div>
-
-
-    <div class="container" id="menu">
+  <div class="menu-items">
+  <% if (foodItems && foodItems.length > 0) { %>
+    <ul>
+      <div class="container" id="menu">
+      <% foodItems.forEach(foodItem => { %>
+        <div class="food-item" id="<%= foodItem.id %>">
+          <img src="<%= foodItem.photo_url %>" alt="<%= foodItem.name %>">
+          <h3><%= foodItem.name %></h3>
+          <p>$<%= foodItem.price %></p>
+          <form method="POST" action="/cart">
+            <input name="order_id" value="" hidden>
+            <input name="food_id" value="<%= foodItem.id %>" hidden>
+          <button type="submit" class="submit-button" data-item-id="<%= foodItem.id %>">Add to Cart</button>
+        </form>
+          <output name="counter" class="counter" id="cart-count"></output>
+          <div class="description">
+              <p><%= foodItem.description %></p>
+          </div>
+      </div>
+      <% }); %>
+    </ul>
+  <% } %>
+</div>
+</div>
+    <!-- <div class="container" id="menu">
 
       <div class="food-item" id="italian-burger">
         <img src="images/italianburger.jpg" alt="Italian burger">
@@ -130,7 +166,7 @@ ejs so we can add js and routes -->
           <p>Savor the flavors of the North with our Combo 3! This meal includes our North Indian Thali, featuring a variety of delectable dishes such as dal makhani, paneer butter masala, mix veg, jeera rice, raita, naan, and a sweet dessert. It's a feast that's sure to please!</p>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="contact-section">
       <div class="contact-us" id="contact-us">
@@ -142,18 +178,14 @@ ejs so we can add js and routes -->
     </div>
       <div class="contact-form">
         <h2>Leave a Message</h2>
-        <form id="contact-form" action="/submit_form" method="post">
+        <form action="/submit_form" method="post">
           <input type="text" id="name" name="name" placeholder="First Name">
-          <input type="text" id="name" name="name" placeholder="Last Name">
           <input type="text" id="email" name="email" placeholder="Your Email">
           <input type="text" id="phone" name="phone" placeholder="Your Phone Number">
           <textarea id="message" name="message" placeholder="Your Message"></textarea>
           <input type="submit" value="Submit">
         </form>
-        <div id="form-error-message" style="display: none; color: red;"></div>
-        <div id="form-success-message" style="display: none; color: green;"></div>
         <div class="our-contact">
-          <!-- will this need to be get/request/ajax? -->
           <h3>Our Contact Information</h3>
           <p>Email: info@example.com</p>
           <p>Phone: +1 2342564219</p>
@@ -163,7 +195,8 @@ ejs so we can add js and routes -->
     </div>
 
     <script src="scripts/icon.js"></script>
-    <script src="scripts/cart.js"></script>
-    <script src="scripts/users.js"></script>
+    <script src="scripts/menu.js"></script>
 </body>
 </html>
+
+
