@@ -1,10 +1,26 @@
 const db = require('../connection');
 
 const getOrders = () => {
-  return db.query('SELECT * FROM orders;')
+  return db.query(`
+  SELECT * FROM ORDERS
+  ;`)
     .then(data => {
       console.log(data.rows)
       return data.rows;
+    });
+};
+const getOrderItems = (id) => {
+  return db.query(`
+  SELECT food_items.name FROM food_items
+  JOIN order_items on order_items.food_id = food_items.id
+  WHERE order_id = ${id}
+  ;`)
+    .then(data => {
+      const foodList = [];
+      for (const foodItem of data.rows) {
+        foodList.push(foodItem.name);
+      }
+      return foodList;
     });
 };
 
@@ -43,4 +59,49 @@ const createOrderItems = (foodIds, orderId) => {
   });
 }
 
-module.exports = { getOrders, createOrder, createOrderItems };
+const acceptOrder = (id) => {
+  return db.query(`
+  UPDATE orders
+  SET date_accepted='NOW()'
+  WHERE orders.id = ${id};`)
+    .then(data => {
+      console.log(data.rows)
+      return data.rows;
+    });
+};
+
+const rejectOrder = (id) => {
+  return db.query(`
+  UPDATE orders
+  SET active='false'
+  WHERE orders.id = ${id};`)
+    .then(data => {
+      console.log(data.rows)
+      return data.rows;
+    });
+};
+
+const completeOrder = (id) => {
+  return db.query(`
+  UPDATE orders
+  SET date_completed='NOW()',
+      active='false'
+  WHERE orders.id = ${id};`)
+    .then(data => {
+      console.log(data.rows)
+      return data.rows;
+    });
+};
+
+const cancelOrder = (id) => {
+  return db.query(`
+  UPDATE orders
+  SET active='false'
+  WHERE orders.id = ${id};`)
+    .then(data => {
+      console.log(data.rows)
+      return data.rows;
+    });
+};
+
+module.exports = { getOrders, getOrderItems, createOrder, createOrderItems, acceptOrder, rejectOrder, completeOrder, cancelOrder };

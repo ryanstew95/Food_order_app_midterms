@@ -21,28 +21,28 @@ $(() => {
         if (order.active && order.date_created !== null && order.date_accepted === null && order.date_completed === null) {
           oStatus = 'pending';
           orderElementbuttons = `
-          <button type="button">Accept order</button>
-          <button type="button">Reject order</button>
+          <button type="button" class="accept">Accept order</button>
+          <button type="button" class="reject">Reject order</button>
           `
         } else if (order.active && order.date_created !== null && order.date_accepted !== null && order.date_completed === null) {
           oStatus = 'progress';
           orderElementbuttons = `
-          <button type="button">Complete order and send ETA</button>
-          <button type="button">Cancel order and notify customer</button>
+          <button type="button" class="complete">Complete order and send ETA</button>
+          <button type="button" class="cancel">Cancel order and notify customer</button>
           `
-        } else if(!order.active && order.date_created !== null && order.date_accepted !== null && order.date_completed !== null) {
+        } else if (!order.active && order.date_created !== null && order.date_accepted !== null && order.date_completed !== null) {
           oStatus = 'completed';
         } else if (!order.active && order.date_created !== null && order.date_completed === null) {
           oStatus = 'cancelled';
         }
         const orderElement = `
-        <article class="order-${oStatus}" id="order${order.id}">
+        <article class="order-${oStatus}" id="${order.id}">
           <header>
-            <div class="order-id">order #${order.id}</div>
+            <div class="order-id"><u>order #${order.id}</u></div>
             <div class="order-status">order status: ${oStatus}</div>
           </header>
+            <div class="order-food_items"></div>
             <div class="order-user_id">user_id ${order.user_id}</div>
-            <div class="order-active">${order.active}</div>
             <div class="order-estimated_time_minutes">ETA: ${order.estimated_time_minutes}</div>
           <footer>
           ${orderElementbuttons}
@@ -62,6 +62,32 @@ $(() => {
           $(orderElement).appendTo($ordersCancelled);
         }
       }
+      let buttons = document.querySelectorAll(".accept, .reject, .complete, .cancel")
+      for (const button of buttons) {
+        let orderId = button.parentElement.parentElement.id;
+        let buttonType = button.className
+        button.addEventListener('click', () => {
+          $.ajax({
+            method: 'POST',
+            url: '/api/orders',
+            data: {buttonType, orderId}
+          })
+          console.log(orderId);
+          console.log(button.className);
+          document.getElementById("fetch-orders").click();
+        })
+      };
+      let orders = document.querySelectorAll(".order-pending, .order-progress, .order-completed, .order-cancelled")
+      for (const order of orders) {
+          $.ajax({
+            method: 'GET',
+            url: `/api/orders/food/${order.id}`
+          }).done(response => {
+            response.orderItems.forEach(item => {
+              $(`<div>• ${item}</div>`).appendTo(order.getElementsByClassName('order-food_items'))[0]
+            });
+          })
+      };
     document.getElementById("defaultTab").click();
     });
   });

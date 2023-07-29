@@ -19,6 +19,9 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  if (!req.body.foodIds) {
+    console.log('update the order')
+  }
   console.log("req.body", req.body);
   const foodIds = req.body.foodIds.map(id => parseInt(id, 10));
   console.log("foodIds", foodIds);
