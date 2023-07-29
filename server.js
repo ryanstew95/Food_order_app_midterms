@@ -69,16 +69,7 @@ app.listen(PORT, () => {
   console.log(`food order app listening on port ${PORT}`);
 });
 
-// pretty sure this is in another file location
-// and I can export it in... need mentor help
-//db/queries/conection.js
-const pool = new Pool({
-  user: 'labber',
-  host: 'localhost',
-  database: 'midterm',
-  password: 'labber',
-  port: 5432,
-});
+const pool = require('./db/connection.js');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // LOGIN //
@@ -112,7 +103,7 @@ app.post('/login', async(req, res) => {
     }
   } catch (error) {
     console.error('Error executing the query:', error);
-    res.render('login1', { error: 'An error occurred. Please try again later.' });
+    res.render('login', { error: 'An error occurred. Please try again later.' });
   }
 });
 
@@ -201,7 +192,7 @@ app.post('/logout', (req, res) => {
 
 // // checkout
 // app.post('/cart/checkout', (req, res) => {
-//   res.render('check-out');
+//   res.render('checkout1');
 // });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // ABOUT //
