@@ -1,3 +1,130 @@
 footer {
 padding-bottom: 0.5rem;
 }
+/* Orders page styling */
+
+body {
+  background-color: #f3f3f3;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5em;
+  margin: 30px 0;
+  font-family: 'Lobster', cursive;
+}
+
+/* Tabs */
+.ordertabs {
+  background-color: #060606;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+}
+
+.ordertabs:hover {
+  background-color: #f3f3f3;
+  color: black;
+}
+
+/* Orders container */
+#orders-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+/* Order sections */
+#orders-active,
+#orders-history {
+  display: none;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Show active orders by default */
+#orders-active {
+  display: block;
+}
+
+/* Order lists */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* Order status styles */
+li.pending {
+  border-left: 5px solid #f1c40f; /* Yellow color for pending orders */
+}
+
+li.progress {
+  border-left: 5px solid #3498db; /* Blue color for orders in progress */
+}
+
+li.completed {
+  border-left: 5px solid #2ecc71; /* Green color for completed orders */
+}
+
+li.cancelled {
+  border-left: 5px solid #e74c3c; /* Red color for cancelled orders */
+}
+
+/* Order details */
+.order-details {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.order-status {
+  font-weight: bold;
+}
+
+.order-date {
+  font-size: 0.9em;
+  color: #888;
+}
+
+/* Fetch orders button */
+#fetch-orders {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#fetch-orders:hover {
+  background-color: #45a049;
+}
