@@ -8,7 +8,7 @@
 const express = require('express');
 const router = express.Router();
 const cartToOrder = require('../db/queries/cart_items');
-const { createOrder, createOrderItems } = require('../db/queries/orders');
+const { createOrder, createOrderItems, acceptOrder, rejectOrder, completeOrder, cancelOrder } = require('../db/queries/orders');
 const accountSid = process.env.ACCOUNT_SID;
 const authToken = process.env.AUTH_TOKEN;
 
@@ -19,6 +19,9 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  if (!req.body.foodIds) {
+    console.log('update the order')
+  }
   console.log("req.body", req.body);
   const foodIds = req.body.foodIds.map(id => parseInt(id, 10));
   console.log("foodIds", foodIds);
@@ -31,14 +34,14 @@ router.post('/', (req, res) => {
     })
     .then(cart => {
       console.log("cart", cart);
-      client.messages
-        .create({
-          body: 'Order confirmed waiting for approval',
-          to: process.env.PERSONAL_NUMBER, // Text your number
-          from: process.env.TWILLIO_NUMBER, // From a valid Twilio number
-        })
-        .then((message) => console.log(message.sid));
-      res.json({ cart });
+      //client.messages
+      //  .create({
+      //    body: 'Order confirmed waiting for approval',
+      //    to: process.env.PERSONAL_NUMBER, // Text your number
+      //    from: process.env.TWILLIO_NUMBER, // From a valid Twilio number
+      //  })
+      //  .then((message) => console.log(message.sid));
+      //res.json({ cart });
     })
     .catch(err => {
       console.log("error", err);

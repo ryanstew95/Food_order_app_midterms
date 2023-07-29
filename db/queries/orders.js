@@ -43,4 +43,49 @@ const createOrderItems = (foodIds, orderId) => {
   });
 }
 
-module.exports = { getOrders, createOrder, createOrderItems };
+const acceptOrder = (id) => {
+  return db.query(`
+  UPDATE orders
+  SET date_accepted='NOW()'
+  WHERE orders.id = ${id};`)
+    .then(data => {
+      console.log(data.rows)
+      return data.rows;
+    });
+};
+
+const rejectOrder = (id) => {
+  return db.query(`
+  UPDATE orders
+  SET active='false'
+  WHERE orders.id = ${id};`)
+    .then(data => {
+      console.log(data.rows)
+      return data.rows;
+    });
+};
+
+const completeOrder = (id) => {
+  return db.query(`
+  UPDATE orders
+  SET date_completed='NOW()',
+      active='false'
+  WHERE orders.id = ${id};`)
+    .then(data => {
+      console.log(data.rows)
+      return data.rows;
+    });
+};
+
+const cancelOrder = (id) => {
+  return db.query(`
+  UPDATE orders
+  SET active='false'
+  WHERE orders.id = ${id};`)
+    .then(data => {
+      console.log(data.rows)
+      return data.rows;
+    });
+};
+
+module.exports = { getOrders, createOrder, createOrderItems, acceptOrder, rejectOrder, completeOrder, cancelOrder };

@@ -8,7 +8,7 @@
 const express = require('express');
 const router  = express.Router();
 const orderQueries = require('../db/queries/orders');
-
+// getOrders, acceptOrder, rejectOrder, completeOrder, cancelOrder
 router.get('/', (req, res) => {
   orderQueries.getOrders()
     .then(orders => {
@@ -19,6 +19,22 @@ router.get('/', (req, res) => {
         .status(500)
         .json({ error: err.message });
     });
+});
+
+router.post('/', (req, res) => {
+  const {orderId, buttonType} = req.body;
+  console.log(req.body)
+  console.log(orderId)
+  console.log(buttonType)
+  orderQueries[`${buttonType}Order`](orderId)
+  .then(() => {
+    console.log('it worked?')
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
 });
 
 module.exports = router;
