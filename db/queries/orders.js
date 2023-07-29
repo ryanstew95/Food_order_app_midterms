@@ -1,10 +1,26 @@
 const db = require('../connection');
 
 const getOrders = () => {
-  return db.query('SELECT * FROM orders;')
+  return db.query(`
+  SELECT * FROM ORDERS
+  ;`)
     .then(data => {
       console.log(data.rows)
       return data.rows;
+    });
+};
+const getOrderItems = (id) => {
+  return db.query(`
+  SELECT food_items.name FROM food_items
+  JOIN order_items on order_items.food_id = food_items.id
+  WHERE order_id = ${id}
+  ;`)
+    .then(data => {
+      const foodList = [];
+      for (const foodItem of data.rows) {
+        foodList.push(foodItem.name);
+      }
+      return foodList;
     });
 };
 
@@ -88,4 +104,4 @@ const cancelOrder = (id) => {
     });
 };
 
-module.exports = { getOrders, createOrder, createOrderItems, acceptOrder, rejectOrder, completeOrder, cancelOrder };
+module.exports = { getOrders, getOrderItems, createOrder, createOrderItems, acceptOrder, rejectOrder, completeOrder, cancelOrder };
