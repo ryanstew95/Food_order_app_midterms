@@ -22,7 +22,7 @@ CREATE TABLE orders (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   active BOOLEAN NOT NULL DEFAULT true,
   estimated_time_minutes INT,
-  date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  date_created TIMESTAMP DEFAULT NOW(),
   date_accepted TIMESTAMP DEFAULT NULL,
   date_completed TIMESTAMP DEFAULT NULL
 );
