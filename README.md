@@ -1,17 +1,18 @@
-LHL Node Skeleton
-food_order project 
-=========
+# Snack-Bar
 
-## Project Setup
+![info](/public/images/midterm.png)
 
-The following steps are only for _one_ of the group members to perform.
-
-1. Create your own copy of this repo using the `Use This Template` button, ideally using the name of your project. The repo should be marked Public
-2. Verify that the skeleton code now shows up in your repo on GitHub, you should be automatically redirected
-3. Clone your copy of the repo to your dev machine
-4. Add your team members as collaborators to the project so that they can push to this repo
-5. Let your team members know the repo URL so that they use the same repo (they should _not_ create a copy/fork of this repo since that will add additional workflow complexity to the project)
-
+## Final Product
+### Home Page
+![navbar](/public/images/nav.png)
+![menu](/public/images/menu.png)
+![contactus](/public/images/contactus.png)
+### Cart Page
+![cart](/public/images/cart.png)
+### Checkout Page
+![checkout](public/images/checkout.png)
+### About Us Page
+![ABOUT](public/images/about-us.png)
 
 ## Getting Started
 
@@ -43,3 +44,29 @@ The following steps are only for _one_ of the group members to perform.
 - Node 10.x or above
 - NPM 5.x or above
 - PG 6.x
+- Chalk 2.4.2
+- dotenv 2.0.0,
+- ejs 2.6.2
+- express 4.17.1
+- express-session 1.17.3
+- morgan 1.9.1
+- pg 8.11.1
+- sass 1.35.1
+- twilio 4.14.0
+
+## Starting the server
+
+1. Run the server: `npm run local`
+
+2. Visit: http://localhost:3000/
+
+
+## The team
+
+- Nick Stilwell: https://github.com/nickstilwell52
+
+- Jesse Sandhu: https://github.com/s-jesse
+
+- Sourav Badhan: https://github.com/sbadhan129
+
+- Ryan Stewart: https://github.com/ryanstew95
