@@ -191,7 +191,7 @@ app.get('/cart', (req, res) => {
 });
 
 // checkout
-app.post('/cart/checkout', (req, res) => {
+app.get('/cart/checkout', (req, res) => {
   res.render('checkout1');
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////

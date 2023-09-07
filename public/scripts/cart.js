@@ -140,7 +140,7 @@ if (cartBtn) {
       data: {foodIds}
     })
     .done((response) => {
-      window.location.href = "/cart/checkout1"
+      window.location.href = "/cart/checkout"
       console.log("response", response)
     })
     .catch(err => {
